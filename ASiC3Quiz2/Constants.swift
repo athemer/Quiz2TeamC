@@ -13,6 +13,7 @@ struct Constants {
     struct Article {
 
         static let entityName = "Article"
+        static let articleID = "articleID"
         static let title = "title"
         static let content = "content"
         static let imageData = "imageData"

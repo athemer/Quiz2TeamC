@@ -15,6 +15,7 @@ class EditPageViewController: UIViewController {
     var dataPassed: Data?
     var titleText: String = ""
     var contentText: String = ""
+    var articleID: String = ""
     
     @IBOutlet weak var closeImageView: UIImageView!
     @IBOutlet weak var imageView: UIImageView!
@@ -31,18 +32,16 @@ class EditPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
         setDefaultView()
-        
+
         titleTextField.delegate = self
         contentTextView.delegate = self
-        
-        
+
         if isUpdate == true {
-            
+
             titleTextField.text = titleText
             contentTextView.text = contentText
-            
+
             imageView.image = UIImage(data: dataPassed!)
         }
 
@@ -51,7 +50,7 @@ class EditPageViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -88,12 +87,12 @@ class EditPageViewController: UIViewController {
         closeImageView.addGestureRecognizer(tapGestureRecognizer2)
 
         saveButton.addTarget(self, action: #selector(self.saveData), for: .touchUpInside)
-        
+
         if isUpdate {
             self.defaultText.isHidden = true
             self.defaultImageIcon.isHidden = true
             self.imageView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
-            
+
             saveButton.setTitle("Update", for: .normal)
         }
 
@@ -187,10 +186,6 @@ class EditPageViewController: UIViewController {
         let content = contentTextView.text!
         let image = imageView.image
 
-        print("========")
-        print("image: \(image)")
-        print("========")
-
         if title == "" {
             showAlert(message: "Please input title")
             return
@@ -206,18 +201,40 @@ class EditPageViewController: UIViewController {
             return
         }
 
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let context = appDelegate.persistentContainer.viewContext
+        let myEntityName = Constants.Article.entityName
+
+        /*
+         *  Use context.fetch() to get data from CoraData
+         */
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: myEntityName)
+        request.predicate = NSPredicate(format: "articleID == %@", self.articleID)
+
+        let imageData = UIImagePNGRepresentation(image!)
+        let imageNSData = NSData(data: UIImageJPEGRepresentation(image!, 1.0)!)
+
+        let articleID = UUID().uuidString
+        print("articleID: \(articleID)")
+        
         do {
-            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-            let context = appDelegate.persistentContainer.viewContext
-            let myEntityName = Constants.Article.entityName
+            guard let results = try context.fetch(request) as? [Article] else { return }
 
-            let article = NSEntityDescription.insertNewObject(forEntityName: myEntityName, into: context)
+            if isUpdate && results.count > 0 {
+                // Update
+                results[0].title = title
+                results[0].content = content
+                results[0].imageData = imageNSData
 
-            article.setValue(title, forKey: Constants.Article.title)
-            article.setValue(content, forKey: Constants.Article.content)
-
-            let imageData = UIImagePNGRepresentation(image!)
-            article.setValue(imageData, forKey: Constants.Article.imageData)
+            } else {
+                // Insert
+                let article = NSEntityDescription.insertNewObject(forEntityName: myEntityName, into: context)
+                
+                article.setValue(articleID, forKey: Constants.Article.articleID)
+                article.setValue(title, forKey: Constants.Article.title)
+                article.setValue(content, forKey: Constants.Article.content)
+                article.setValue(imageData, forKey: Constants.Article.imageData)
+            }
 
             try context.save()
             self.navigationController?.popToRootViewController(animated: true)
@@ -225,9 +242,7 @@ class EditPageViewController: UIViewController {
         } catch {
             print(error.localizedDescription)
         }
-        
-        
-        
+
     }
 
     func showAlert(message: String) {

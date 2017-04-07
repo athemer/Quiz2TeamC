@@ -84,7 +84,9 @@ class MainPageTableViewController: UITableViewController {
         let storyBoard = UIStoryboard(name: "EditPage", bundle: nil)
         guard let editPageViewController = storyBoard.instantiateViewController(withIdentifier: "EditPageViewController") as? EditPageViewController else { return }
 
-        
+        if let articleID = fetchedResult.value(forKey: "articleID") as? String {
+            editPageViewController.articleID = articleID
+        }
         
         if let photo = fetchedResult.value(forKey: "imageData") as? Data {
             editPageViewController.dataPassed = photo
