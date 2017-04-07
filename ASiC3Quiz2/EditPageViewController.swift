@@ -173,14 +173,12 @@ class EditPageViewController: UIViewController {
 
     // MARK: - Close Button
     func closeView() {
-        print("=== closeView ===")
 
         self.navigationController?.popToRootViewController(animated: true)
-        
+
     }
 
     func saveData() {
-        print("=== saveData ===")
 
         let title = titleTextField.text!
         let content = contentTextView.text!
@@ -215,8 +213,7 @@ class EditPageViewController: UIViewController {
         let imageNSData = NSData(data: UIImageJPEGRepresentation(image!, 1.0)!)
 
         let articleID = UUID().uuidString
-        print("articleID: \(articleID)")
-        
+
         do {
             guard let results = try context.fetch(request) as? [Article] else { return }
 
@@ -229,7 +226,7 @@ class EditPageViewController: UIViewController {
             } else {
                 // Insert
                 let article = NSEntityDescription.insertNewObject(forEntityName: myEntityName, into: context)
-                
+
                 article.setValue(articleID, forKey: Constants.Article.articleID)
                 article.setValue(title, forKey: Constants.Article.title)
                 article.setValue(content, forKey: Constants.Article.content)
