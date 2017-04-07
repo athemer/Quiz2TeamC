@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		39F8A7D1544A1D1C1C279A30 /* Pods_ASiC3Quiz2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F905171653353DFE05B8F97 /* Pods_ASiC3Quiz2.framework */; };
+		D13884D11E97310B0061A8D2 /* EditPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D13884CF1E97310B0061A8D2 /* EditPage.storyboard */; };
+		D13884D21E97310B0061A8D2 /* EditPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13884D01E97310B0061A8D2 /* EditPageViewController.swift */; };
 		D15704FC1E97252200F59894 /* MainPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15704FA1E97252200F59894 /* MainPageTableViewCell.swift */; };
 		D15704FD1E97252200F59894 /* MainPageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D15704FB1E97252200F59894 /* MainPageTableViewCell.xib */; };
 		D15705011E972B6B00F59894 /* MainPageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15705001E972B6B00F59894 /* MainPageTableViewController.swift */; };
@@ -22,6 +24,8 @@
 		007027168FD4CB88681E1D26 /* Pods-ASiC3Quiz2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ASiC3Quiz2.release.xcconfig"; path = "Pods/Target Support Files/Pods-ASiC3Quiz2/Pods-ASiC3Quiz2.release.xcconfig"; sourceTree = "<group>"; };
 		3F44F136FF5611A341FB2F55 /* Pods-ASiC3Quiz2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ASiC3Quiz2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ASiC3Quiz2/Pods-ASiC3Quiz2.debug.xcconfig"; sourceTree = "<group>"; };
 		4F905171653353DFE05B8F97 /* Pods_ASiC3Quiz2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ASiC3Quiz2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D13884CF1E97310B0061A8D2 /* EditPage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EditPage.storyboard; sourceTree = "<group>"; };
+		D13884D01E97310B0061A8D2 /* EditPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditPageViewController.swift; sourceTree = "<group>"; };
 		D15704FA1E97252200F59894 /* MainPageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageTableViewCell.swift; sourceTree = "<group>"; };
 		D15704FB1E97252200F59894 /* MainPageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainPageTableViewCell.xib; sourceTree = "<group>"; };
 		D15705001E972B6B00F59894 /* MainPageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageTableViewController.swift; sourceTree = "<group>"; };
@@ -93,6 +97,8 @@
 		D17B29421E963C18001374EB /* ASiC3Quiz2 */ = {
 			isa = PBXGroup;
 			children = (
+				D13884CF1E97310B0061A8D2 /* EditPage.storyboard */,
+				D13884D01E97310B0061A8D2 /* EditPageViewController.swift */,
 				D15704FF1E97253000F59894 /* ViewController */,
 				D15704FE1E97252800F59894 /* Model */,
 				D17B29431E963C18001374EB /* AppDelegate.swift */,
@@ -126,6 +132,7 @@
 				D17B293E1E963C18001374EB /* Resources */,
 				57A862EDDBB0474D1CEC9481 /* [CP] Embed Pods Frameworks */,
 				DB0535E1B4AFF45710919882 /* [CP] Copy Pods Resources */,
+				D13884D31E9731270061A8D2 /* swiftLint */,
 			);
 			buildRules = (
 			);
@@ -179,6 +186,7 @@
 				D17B29511E963C18001374EB /* LaunchScreen.storyboard in Resources */,
 				D17B294E1E963C18001374EB /* Assets.xcassets in Resources */,
 				D17B29491E963C18001374EB /* Main.storyboard in Resources */,
+				D13884D11E97310B0061A8D2 /* EditPage.storyboard in Resources */,
 				D15704FD1E97252200F59894 /* MainPageTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -216,6 +224,20 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		D13884D31E9731270061A8D2 /* swiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = swiftLint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
 		DB0535E1B4AFF45710919882 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -241,6 +263,7 @@
 				D17B294C1E963C18001374EB /* ASiC3Quiz2.xcdatamodeld in Sources */,
 				D17B29441E963C18001374EB /* AppDelegate.swift in Sources */,
 				D15704FC1E97252200F59894 /* MainPageTableViewCell.swift in Sources */,
+				D13884D21E97310B0061A8D2 /* EditPageViewController.swift in Sources */,
 				D15705011E972B6B00F59894 /* MainPageTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
