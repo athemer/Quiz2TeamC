@@ -9,20 +9,28 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Root View Controller-->
+        <!--Main Page Table View Controller-->
         <scene sceneID="7hP-yS-SiR">
             <objects>
                 <tableViewController storyboardIdentifier="MainPageTableViewController" id="xfA-bl-189" customClass="MainPageTableViewController" customModule="ASiC3Quiz2" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="QMn-Dq-ojA">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="QMn-Dq-ojA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <sections/>
                         <connections>
                             <outlet property="dataSource" destination="xfA-bl-189" id="bO5-D8-nFH"/>
                             <outlet property="delegate" destination="xfA-bl-189" id="ZtU-cc-fbd"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="ZDU-tp-ngx"/>
+                    <navigationItem key="navigationItem" id="ZDU-tp-ngx">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="9ad-l3-p2O">
+                            <color key="tintColor" red="0.92941176470588238" green="0.37647058823529411" blue="0.31764705882352939" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="addTapped:" destination="xfA-bl-189" id="fXw-4D-soz"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pLa-xU-FSC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
