@@ -16,7 +16,7 @@ class MainPageTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+
         articleImage.layer.cornerRadius = 8
         articleImage.layer.masksToBounds = false
         articleImage.layer.borderWidth = 0.5

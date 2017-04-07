@@ -8,6 +8,7 @@
 
 import UIKit
 import Photos
+import CoreData
 
 class EditPageViewController: UIViewController {
 
@@ -19,6 +20,9 @@ class EditPageViewController: UIViewController {
 
     @IBOutlet weak var defaultImageIcon: UIImageView!
     @IBOutlet weak var defaultText: UILabel!
+
+    var titleArray: [NSManagedObject] = []
+    var isUpdate = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,6 +68,8 @@ class EditPageViewController: UIViewController {
         let tapGestureRecognizer2 = UITapGestureRecognizer(target: self, action: #selector(self.closeView))
         closeImageView.isUserInteractionEnabled = true
         closeImageView.addGestureRecognizer(tapGestureRecognizer2)
+
+        saveButton.addTarget(self, action: #selector(self.saveData), for: .touchUpInside)
 
     }
 
@@ -143,10 +149,91 @@ class EditPageViewController: UIViewController {
     // MARK: - Close Button
     func closeView() {
         print("=== closeView ===")
+
+        guard
+            let appDelegate = UIApplication.shared.delegate as? AppDelegate
+            else { return }
+
+        let managedContext = appDelegate.persistentContainer.viewContext
+
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Article")
+
+        do {
+            titleArray = try managedContext.fetch(fetchRequest)
+        } catch let error as NSError {
+            print("Could not fetch.")
+        }
+
+        print("titleArray = \(titleArray)")
+
+        if let photo = titleArray[0].value(forKey: "imageData") as? Data {
+            let testImage = UIImage(data: photo)
+            self.closeImageView.image = testImage
+        }
     }
 
     func saveData() {
+        print("=== saveData ===")
 
+        let title = titleTextField.text!
+        let content = contentTextView.text!
+        let image = imageView.image
+
+        print("========")
+        print("image: \(image)")
+        print("========")
+
+        if title == "" {
+            showAlert(message: "Please input title")
+            return
+        }
+
+        if content == "" {
+            showAlert(message: "Please input content")
+            return
+        }
+
+        if image == nil {
+            showAlert(message: "Please select a picture")
+            return
+        }
+
+        do {
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+            let context = appDelegate.persistentContainer.viewContext
+            let myEntityName = Constants.Article.entityName
+
+            let article = NSEntityDescription.insertNewObject(forEntityName: myEntityName, into: context)
+
+            article.setValue(title, forKey: Constants.Article.title)
+            article.setValue(content, forKey: Constants.Article.content)
+
+            let imageData = UIImagePNGRepresentation(image!)
+            article.setValue(imageData, forKey: Constants.Article.imageData)
+
+            try context.save()
+
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+
+    func showAlert(message: String) {
+        let alertController = UIAlertController(
+            title: "Invaild Article",
+            message: message,
+            preferredStyle: .alert)
+
+        let okAction = UIAlertAction(
+            title: "Check",
+            style: .default)
+
+        alertController.addAction(okAction)
+
+        self.present(
+            alertController,
+            animated: true,
+            completion: nil)
     }
 }
 
@@ -161,7 +248,6 @@ extension EditPageViewController: UIImagePickerControllerDelegate, UINavigationC
 
         self.imageView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
         self.imageView.image = image
-//        self.imageView.contentMode = .scaleAspectFit
 
         picker.dismiss(animated: true, completion: nil)
     }
