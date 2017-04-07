@@ -11,6 +11,7 @@ import Photos
 
 class EditPageViewController: UIViewController {
 
+    @IBOutlet weak var closeImageView: UIImageView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var contentTextView: UITextView!
@@ -23,6 +24,10 @@ class EditPageViewController: UIViewController {
         super.viewDidLoad()
 
         setDefaultView()
+
+        titleTextField.delegate = self
+        contentTextView.delegate = self
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -54,6 +59,11 @@ class EditPageViewController: UIViewController {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.openPhotoLibrary))
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(tapGestureRecognizer)
+
+        // Set action in closeImageView
+        let tapGestureRecognizer2 = UITapGestureRecognizer(target: self, action: #selector(self.closeView))
+        closeImageView.isUserInteractionEnabled = true
+        closeImageView.addGestureRecognizer(tapGestureRecognizer2)
 
     }
 
@@ -102,7 +112,7 @@ class EditPageViewController: UIViewController {
 
     // MARK: - Photo
     func openPhotoLibrary() {
-        print("=== openPhotoLibrary ===")
+
         // check permission
         if PHPhotoLibrary.authorizationStatus() == .authorized {
             // open library
@@ -118,7 +128,7 @@ class EditPageViewController: UIViewController {
     }
 
     func needPermission() {
-        print("=== needPermission ===")
+
         if PHPhotoLibrary.authorizationStatus() == .notDetermined {
             PHPhotoLibrary.requestAuthorization({ (_) in
                 self.openPhotoLibrary()
@@ -128,6 +138,11 @@ class EditPageViewController: UIViewController {
             let url = URL(string: UIApplicationOpenSettingsURLString)!
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
+    }
+
+    // MARK: - Close Button
+    func closeView() {
+        print("=== closeView ===")
     }
 
     func saveData() {
@@ -153,5 +168,21 @@ extension EditPageViewController: UIImagePickerControllerDelegate, UINavigationC
 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension EditPageViewController: UITextFieldDelegate, UITextViewDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            self.view.endEditing(true)
+            return false
+        }
+        return true
     }
 }
