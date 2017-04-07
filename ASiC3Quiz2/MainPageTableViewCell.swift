@@ -10,6 +10,8 @@ import UIKit
 
 class MainPageTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var backGroundView: UIView!
+
     @IBOutlet weak var articleImage: UIImageView!
 
     @IBOutlet weak var articleTitle: UILabel!
@@ -17,14 +19,23 @@ class MainPageTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        articleImage.layer.cornerRadius = 8
-//        articleImage.layer.masksToBounds = true
-        articleImage.layer.borderWidth = 0.5
-        articleImage.layer.shadowRadius = 8
-        articleImage.layer.shadowColor = UIColor.black.cgColor
-        articleImage.layer.shadowOpacity = 0.8
-        articleImage.layer.shadowOffset = CGSize(width: 5, height: 5)
+        
 
+        backGroundView.clipsToBounds = false
+        backGroundView.layer.shadowColor = UIColor.black.cgColor
+        backGroundView.layer.shadowOpacity = 1
+        backGroundView.layer.shadowOffset = CGSize.zero
+        backGroundView.layer.shadowRadius = 8
+        backGroundView.layer.shadowPath = UIBezierPath(roundedRect: backGroundView.bounds, cornerRadius: 10).cgPath
+        
+        articleImage.layer.cornerRadius = 8
+        articleImage.clipsToBounds = true
+        articleImage.layer.borderWidth = 0.5
+
+
+        
+        
+        
         // Initialization code
     }
 

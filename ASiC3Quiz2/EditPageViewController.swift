@@ -12,6 +12,10 @@ import CoreData
 
 class EditPageViewController: UIViewController {
 
+    var dataPassed: Data?
+    var titleText: String = ""
+    var contentText: String = ""
+    
     @IBOutlet weak var closeImageView: UIImageView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleTextField: UITextField!
@@ -27,13 +31,27 @@ class EditPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
         setDefaultView()
-
+        
         titleTextField.delegate = self
         contentTextView.delegate = self
+        
+        
+        if isUpdate == true {
+            
+            titleTextField.text = titleText
+            contentTextView.text = contentText
+            
+            imageView.image = UIImage(data: dataPassed!)
+        }
 
     }
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -70,6 +88,14 @@ class EditPageViewController: UIViewController {
         closeImageView.addGestureRecognizer(tapGestureRecognizer2)
 
         saveButton.addTarget(self, action: #selector(self.saveData), for: .touchUpInside)
+        
+        if isUpdate {
+            self.defaultText.isHidden = true
+            self.defaultImageIcon.isHidden = true
+            self.imageView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+            
+            saveButton.setTitle("Update", for: .normal)
+        }
 
     }
 
@@ -150,26 +176,8 @@ class EditPageViewController: UIViewController {
     func closeView() {
         print("=== closeView ===")
 
-        guard
-            let appDelegate = UIApplication.shared.delegate as? AppDelegate
-            else { return }
-
-        let managedContext = appDelegate.persistentContainer.viewContext
-
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Article")
-
-        do {
-            titleArray = try managedContext.fetch(fetchRequest)
-        } catch let error as NSError {
-            print("Could not fetch.")
-        }
-
-        print("titleArray = \(titleArray)")
-
-        if let photo = titleArray[0].value(forKey: "imageData") as? Data {
-            let testImage = UIImage(data: photo)
-            self.closeImageView.image = testImage
-        }
+        self.navigationController?.popToRootViewController(animated: true)
+        
     }
 
     func saveData() {
@@ -212,10 +220,14 @@ class EditPageViewController: UIViewController {
             article.setValue(imageData, forKey: Constants.Article.imageData)
 
             try context.save()
+            self.navigationController?.popToRootViewController(animated: true)
 
         } catch {
             print(error.localizedDescription)
         }
+        
+        
+        
     }
 
     func showAlert(message: String) {

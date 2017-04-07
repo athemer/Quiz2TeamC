@@ -17,14 +17,26 @@ class MainPageTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+
+        
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.backgroundColor = UIColor.white
 
-        fetchDataFromCoredata()
+
         setUpTitle()
         registerCell()
 
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        dataArray.removeAll()
+        
+        fetchDataFromCoredata()
+
+        navigationController?.navigationBar.isHidden = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,7 +53,7 @@ class MainPageTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+        return dataArray.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -59,7 +71,8 @@ class MainPageTableViewController: UITableViewController {
         if let title = fetchedResult.value(forKey: "title") as? String {
             cell.articleTitle.text = title
         }
-
+        
+        
 
         return cell
     }
@@ -71,18 +84,23 @@ class MainPageTableViewController: UITableViewController {
         let storyBoard = UIStoryboard(name: "EditPage", bundle: nil)
         guard let editPageViewController = storyBoard.instantiateViewController(withIdentifier: "EditPageViewController") as? EditPageViewController else { return }
 
-        if let photo = fetchedResult.value(forKey: "imageData") as? UIImage {
-            editPageViewController.imageView.image = photo
+        
+        
+        if let photo = fetchedResult.value(forKey: "imageData") as? Data {
+            editPageViewController.dataPassed = photo
         }
 
         if let title = fetchedResult.value(forKey: "title") as? String {
-            editPageViewController.titleTextField.text = title
+            editPageViewController.titleText = title
+
         }
 
         if let content = fetchedResult.value(forKey: "content") as? String {
-            editPageViewController.contentTextView.text = content
+            editPageViewController.contentText = content
         }
 
+        editPageViewController.isUpdate = true
+        
         self.navigationController?.navigationBar.isHidden = true
         self.navigationController?.pushViewController(editPageViewController, animated: true)
 

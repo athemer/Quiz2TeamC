@@ -18,6 +18,7 @@
 		D17B294C1E963C18001374EB /* ASiC3Quiz2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D17B294A1E963C18001374EB /* ASiC3Quiz2.xcdatamodeld */; };
 		D17B294E1E963C18001374EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D17B294D1E963C18001374EB /* Assets.xcassets */; };
 		D17B29511E963C18001374EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D17B294F1E963C18001374EB /* LaunchScreen.storyboard */; };
+		D18ACBFF1E97746900B4F714 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18ACBFE1E97746900B4F714 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,7 +29,7 @@
 		D13884D01E97310B0061A8D2 /* EditPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditPageViewController.swift; sourceTree = "<group>"; };
 		D15704FA1E97252200F59894 /* MainPageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageTableViewCell.swift; sourceTree = "<group>"; };
 		D15704FB1E97252200F59894 /* MainPageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainPageTableViewCell.xib; sourceTree = "<group>"; };
-		D15705001E972B6B00F59894 /* MainPageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageTableViewController.swift; sourceTree = "<group>"; };
+		D15705001E972B6B00F59894 /* MainPageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageTableViewController.swift; sourceTree = "<group>"; tabWidth = 3; };
 		D17B29401E963C18001374EB /* ASiC3Quiz2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ASiC3Quiz2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D17B29431E963C18001374EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D17B29481E963C18001374EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -36,6 +37,7 @@
 		D17B294D1E963C18001374EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D17B29501E963C18001374EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D17B29521E963C18001374EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D18ACBFE1E97746900B4F714 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 				D15704FF1E97253000F59894 /* ViewController */,
 				D15704FE1E97252800F59894 /* Model */,
 				D17B29431E963C18001374EB /* AppDelegate.swift */,
+				D18ACBFE1E97746900B4F714 /* Constants.swift */,
 				D17B29471E963C18001374EB /* Main.storyboard */,
 				D13884CF1E97310B0061A8D2 /* EditPage.storyboard */,
 				D13884D01E97310B0061A8D2 /* EditPageViewController.swift */,
@@ -265,6 +268,7 @@
 				D15704FC1E97252200F59894 /* MainPageTableViewCell.swift in Sources */,
 				D13884D21E97310B0061A8D2 /* EditPageViewController.swift in Sources */,
 				D15705011E972B6B00F59894 /* MainPageTableViewController.swift in Sources */,
+				D18ACBFF1E97746900B4F714 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
