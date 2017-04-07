@@ -97,12 +97,12 @@
 		D17B29421E963C18001374EB /* ASiC3Quiz2 */ = {
 			isa = PBXGroup;
 			children = (
-				D13884CF1E97310B0061A8D2 /* EditPage.storyboard */,
-				D13884D01E97310B0061A8D2 /* EditPageViewController.swift */,
 				D15704FF1E97253000F59894 /* ViewController */,
 				D15704FE1E97252800F59894 /* Model */,
 				D17B29431E963C18001374EB /* AppDelegate.swift */,
 				D17B29471E963C18001374EB /* Main.storyboard */,
+				D13884CF1E97310B0061A8D2 /* EditPage.storyboard */,
+				D13884D01E97310B0061A8D2 /* EditPageViewController.swift */,
 				D17B294D1E963C18001374EB /* Assets.xcassets */,
 				D17B294F1E963C18001374EB /* LaunchScreen.storyboard */,
 				D17B29521E963C18001374EB /* Info.plist */,

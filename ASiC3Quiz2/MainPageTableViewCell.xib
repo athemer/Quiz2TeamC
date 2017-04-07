@@ -13,20 +13,20 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" restorationIdentifier="MainPageTableViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="MainPageTableViewCell" rowHeight="333" id="KGk-i7-Jjw" customClass="MainPageTableViewCell" customModule="ASiC3Quiz2" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="394" height="212"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="212"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="394" height="211.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rmh-qI-IbA">
-                        <rect key="frame" x="20" y="10" width="354" height="140"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AW" translatesAutoresizingMaskIntoConstraints="NO" id="rmh-qI-IbA">
+                        <rect key="frame" x="20" y="10" width="335" height="140"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="140" id="eRz-EC-m6V"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nulla vitae elit libero, a pharetra augue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nAC-f5-0ch">
-                        <rect key="frame" x="38" y="166" width="318" height="16"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nulla vitae elit libero, a pharetra augue Nulla vitae elit libero, a pharetra augue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nAC-f5-0ch">
+                        <rect key="frame" x="38" y="166" width="299" height="16"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="16" id="d0q-o7-gB7"/>
                         </constraints>
@@ -34,17 +34,34 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uYC-sp-5XI">
+                        <rect key="frame" x="38" y="193" width="299" height="0.5"/>
+                        <color key="backgroundColor" red="0.6705882352941176" green="0.70196078431372544" blue="0.69019607843137254" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="G4i-YN-AUq"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="bottomMargin" secondItem="uYC-sp-5XI" secondAttribute="bottom" constant="9.8000000000000007" id="2SZ-J5-xft"/>
                     <constraint firstItem="nAC-f5-0ch" firstAttribute="top" secondItem="rmh-qI-IbA" secondAttribute="bottom" constant="16" id="5Wn-I6-2Ir"/>
+                    <constraint firstItem="uYC-sp-5XI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="30" id="av8-XO-sXL"/>
                     <constraint firstAttribute="trailingMargin" secondItem="rmh-qI-IbA" secondAttribute="trailing" constant="12" id="bkm-Dy-8in"/>
                     <constraint firstItem="rmh-qI-IbA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="12" id="cYu-8y-PfK"/>
                     <constraint firstAttribute="trailingMargin" secondItem="nAC-f5-0ch" secondAttribute="trailing" constant="30" id="dAI-yP-r2a"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="uYC-sp-5XI" secondAttribute="trailing" constant="30" id="hoI-fa-YTe"/>
                     <constraint firstItem="nAC-f5-0ch" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="30" id="kng-h3-oTj"/>
                     <constraint firstItem="rmh-qI-IbA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="tU4-5d-jFz"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="articleImage" destination="rmh-qI-IbA" id="6nj-lI-kNN"/>
+                <outlet property="articleTitle" destination="nAC-f5-0ch" id="aLr-Xu-FGd"/>
+            </connections>
             <point key="canvasLocation" x="174" y="105"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="AW" width="1300" height="808"/>
+    </resources>
 </document>

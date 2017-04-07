@@ -10,8 +10,17 @@ import UIKit
 
 class MainPageTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var articleImage: UIImageView!
+
+    @IBOutlet weak var articleTitle: UILabel!
+
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        articleImage.layer.cornerRadius = 8
+        articleImage.layer.masksToBounds = false
+        articleImage.layer.borderWidth = 0.5
+        articleImage.layer.shadowRadius = 8
         // Initialization code
     }
 
