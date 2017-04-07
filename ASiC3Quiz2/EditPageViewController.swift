@@ -16,7 +16,7 @@ class EditPageViewController: UIViewController {
     var titleText: String = ""
     var contentText: String = ""
     var articleID: String = ""
-    
+
     @IBOutlet weak var closeImageView: UIImageView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleTextField: UITextField!
@@ -64,13 +64,13 @@ class EditPageViewController: UIViewController {
     }
     func setDefaultView() {
 
-        let color1 = UIColor(red: 26/255, green: 34/255, blue: 38/255, alpha: 1)
-        let color2 = UIColor(red: 67/255, green: 87/255, blue: 97/255, alpha: 1)
-
-        let gradient = CAGradientLayer()
-        gradient.frame = imageView.frame
-        gradient.colors = [color1.cgColor, color2.cgColor]
-        imageView.layer.insertSublayer(gradient, at: 0)
+//        let color1 = UIColor(red: 26/255, green: 34/255, blue: 38/255, alpha: 1)
+//        let color2 = UIColor(red: 67/255, green: 87/255, blue: 97/255, alpha: 1)
+//
+//        let gradient = CAGradientLayer()
+//        gradient.frame = imageView.frame
+//        gradient.colors = [color1.cgColor, color2.cgColor]
+//        imageView.layer.insertSublayer(gradient, at: 0)
 
         let image = UIImage(named: "icon_photo")!.withRenderingMode(.alwaysTemplate)
         defaultImageIcon.image = image
@@ -86,6 +86,11 @@ class EditPageViewController: UIViewController {
         closeImageView.isUserInteractionEnabled = true
         closeImageView.addGestureRecognizer(tapGestureRecognizer2)
 
+        saveButton.layer.cornerRadius = 22
+        saveButton.layer.shadowOpacity = 0.25
+        saveButton.layer.shadowRadius = 2
+        saveButton.layer.shadowOffset = CGSize(width: 4.0, height: 2.0)
+
         saveButton.addTarget(self, action: #selector(self.saveData), for: .touchUpInside)
 
         if isUpdate {
@@ -95,7 +100,12 @@ class EditPageViewController: UIViewController {
 
             saveButton.setTitle("Update", for: .normal)
         }
-
+        
+        titleTextField.placeholder = "Please input title"
+        titleTextField.clearButtonMode = .whileEditing
+        titleTextField.returnKeyType = .done
+        
+        contentTextView.returnKeyType = .done
     }
 
     // MARK: - Keyboard Observer
