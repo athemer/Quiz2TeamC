@@ -7,15 +7,24 @@
 //
 
 import UIKit
+import CoreData
 
 class MainPageTableViewController: UITableViewController {
   
+    var titleArray: [NSManagedObject] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationController?.navigationBar.setBackgroundImage(UIImage() , for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.backgroundColor = UIColor.white
+
         
+        fetchDataFromCoredata()
         setUpTitle()
         registerCell()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,16 +49,32 @@ class MainPageTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MainPageTableViewCell") as! MainPageTableViewCell
         // swiftlint:disable:previous force_cast
         
+//        let fetchedResults = titleArray[indexPath.row]
+//
+//        
+//        cell.articleTitle.text = fetchedResults.value(forKey: "title") as? String
+//        cell.articleImage = fetchedResults.value(forKey: "image") as?
+        
+        
         return cell
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
+        
+        
+        
+        
+        
+        
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 212
     }
     
-//    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 212
-//    }
 
     func registerCell() {
         let articleNib = UINib(nibName: "MainPageTableViewCell", bundle: nil)
@@ -59,11 +84,44 @@ class MainPageTableViewController: UITableViewController {
     func setUpTitle() {
         let longTitleLabel = UILabel()
         longTitleLabel.text = "    My Journals"
-        longTitleLabel.font.withSize(40)
+        longTitleLabel.font = UIFont.systemFont(ofSize: 20)
+        longTitleLabel.textColor = UIColor(red: 67/255, green: 87/255, blue: 97/255, alpha: 1)
         longTitleLabel.sizeToFit()
         
         let leftItem = UIBarButtonItem(customView: longTitleLabel)
         self.navigationItem.leftBarButtonItem = leftItem
     }
     
+    
+    func fetchDataFromCoredata () {
+
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: "Article")
+        
+        do {
+            titleArray = try managedContext.fetch(fetchRequest)
+        } catch let error as NSError {
+            print("Could not fetch.")
+        }
+        self.tableView.reloadData()
+    }
+    
+    
+    @IBAction func addTapped(_ sender: Any) {
+        
+        print ("cool")
+    }
+    
 }
+
+
+
+

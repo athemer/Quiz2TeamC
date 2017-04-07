@@ -26,6 +26,9 @@
                     <navigationItem key="navigationItem" id="ZDU-tp-ngx">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="9ad-l3-p2O">
                             <color key="tintColor" red="0.92941176470588238" green="0.37647058823529411" blue="0.31764705882352939" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="addTapped:" destination="xfA-bl-189" id="fXw-4D-soz"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
