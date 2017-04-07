@@ -11,7 +11,7 @@ import CoreData
 
 class MainPageTableViewController: UITableViewController {
   
-    var titleArray: [NSManagedObject] = []
+    var dataArray: [NSManagedObject] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,25 +49,44 @@ class MainPageTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MainPageTableViewCell") as! MainPageTableViewCell
         // swiftlint:disable:previous force_cast
         
-//        let fetchedResults = titleArray[indexPath.row]
-//
-//        
-//        cell.articleTitle.text = fetchedResults.value(forKey: "title") as? String
-//        cell.articleImage = fetchedResults.value(forKey: "image") as?
+        
+        
+        let fetchedResult = dataArray[indexPath.row]
+        
+        
+        if let photo = fetchedResult.value(forKey: "imageData") as? Data {
+            cell.articleImage.image = UIImage(data: photo)
+        }
+        
+        if let title = fetchedResult.value(forKey: "title") as? String {
+            cell.articleTitle.text = title
+        }
         
         
         return cell
     }
-    
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        let fetchedResult = dataArray[indexPath.row]
         
+        let storyBoard = UIStoryboard(name: "EditPage", bundle: nil)
+        guard let editPageViewController = storyBoard.instantiateViewController(withIdentifier: "EditPageViewController") as? EditPageViewController else { return }
         
+        if let photo = fetchedResult.value(forKey: "imageData") as? UIImage {
+            editPageViewController.imageView.image = photo
+        }
         
+        if let title = fetchedResult.value(forKey: "title") as? String {
+            editPageViewController.titleTextField.text = title
+        }
         
-        
-        
-        
+        if let content = fetchedResult.value(forKey: "content") as? String {
+            editPageViewController.contentTextView.text = content
+        }
+
+        self.navigationController?.navigationBar.isHidden = true
+        self.navigationController?.pushViewController(editPageViewController, animated: true)
         
     }
     
@@ -107,8 +126,9 @@ class MainPageTableViewController: UITableViewController {
             NSFetchRequest<NSManagedObject>(entityName: "Article")
         
         do {
-            titleArray = try managedContext.fetch(fetchRequest)
+            dataArray = try managedContext.fetch(fetchRequest)
         } catch let error as NSError {
+            
             print("Could not fetch.")
         }
         self.tableView.reloadData()
@@ -118,6 +138,12 @@ class MainPageTableViewController: UITableViewController {
     @IBAction func addTapped(_ sender: Any) {
         
         print ("cool")
+        
+        let storyBoard = UIStoryboard(name: "EditPage", bundle: nil)
+        guard let editPageViewController = storyBoard.instantiateViewController(withIdentifier: "EditPageViewController") as? EditPageViewController else { return }
+        
+        self.navigationController?.navigationBar.isHidden = true
+        self.navigationController?.pushViewController(editPageViewController, animated: true)
     }
     
 }

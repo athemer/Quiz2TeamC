@@ -17,10 +17,18 @@ class MainPageTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+    
+        articleImage.layer.shadowPath =  UIBezierPath(rect: articleImage.bounds).cgPath
         articleImage.layer.cornerRadius = 8
-        articleImage.layer.masksToBounds = false
+//        articleImage.layer.masksToBounds = true
         articleImage.layer.borderWidth = 0.5
         articleImage.layer.shadowRadius = 8
+        articleImage.layer.shadowColor = UIColor.black.cgColor
+        articleImage.layer.shadowOpacity = 0.8
+        articleImage.layer.shadowOffset = CGSize(width: 5, height: 5)
+        
+        
+        
         // Initialization code
     }
 
