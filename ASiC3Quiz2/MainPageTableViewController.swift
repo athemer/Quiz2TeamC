@@ -11,6 +11,7 @@ import CoreData
 
 class MainPageTableViewController: UITableViewController {
 
+
     var dataArray: [NSManagedObject] = []
 
     override func viewDidLoad() {
@@ -48,6 +49,7 @@ class MainPageTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MainPageTableViewCell") as! MainPageTableViewCell
         // swiftlint:disable:previous force_cast
 
+
         let fetchedResult = dataArray[indexPath.row]
 
         if let photo = fetchedResult.value(forKey: "imageData") as? Data {
@@ -57,6 +59,7 @@ class MainPageTableViewController: UITableViewController {
         if let title = fetchedResult.value(forKey: "title") as? String {
             cell.articleTitle.text = title
         }
+
 
         return cell
     }
@@ -136,6 +139,7 @@ class MainPageTableViewController: UITableViewController {
 
         self.navigationController?.navigationBar.isHidden = true
         self.navigationController?.pushViewController(editPageViewController, animated: true)
+
     }
 
 }

@@ -17,7 +17,6 @@ class MainPageTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        articleImage.layer.shadowPath =  UIBezierPath(rect: articleImage.bounds).cgPath
         articleImage.layer.cornerRadius = 8
 //        articleImage.layer.masksToBounds = true
         articleImage.layer.borderWidth = 0.5
