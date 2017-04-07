@@ -84,7 +84,9 @@ class MainPageTableViewController: UITableViewController {
         let storyBoard = UIStoryboard(name: "EditPage", bundle: nil)
         guard let editPageViewController = storyBoard.instantiateViewController(withIdentifier: "EditPageViewController") as? EditPageViewController else { return }
 
-        
+        if let articleID = fetchedResult.value(forKey: "articleID") as? String {
+            editPageViewController.articleID = articleID
+        }
         
         if let photo = fetchedResult.value(forKey: "imageData") as? Data {
             editPageViewController.dataPassed = photo
@@ -160,4 +162,51 @@ class MainPageTableViewController: UITableViewController {
 
     }
 
+    override func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
+        
+        let delete = UITableViewRowAction(style: .normal, title: "刪除") { action, index in
+            
+            
+            let fetchedResult = self.dataArray[index.row]
+            
+            guard let articleID = fetchedResult.value(forKey: "articleID") as? String else {return}
+            
+            self.deleteRecords(forArticleID: articleID)
+            
+            
+            print("more button tapped")
+        }
+        delete.backgroundColor = .red
+        
+        
+        return [delete]
+    }
+
+    func deleteRecords(forArticleID: String) {
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let context = appDelegate.persistentContainer.viewContext
+        let myEntityName = Constants.Article.entityName
+        
+        /*
+         *  Use context.fetch() to get data from CoraData
+         */
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: myEntityName)
+        request.predicate = NSPredicate(format: "articleID == %@", forArticleID)
+        
+        do {
+            guard let results = try context.fetch(request) as? [Article] else { return }
+            
+            for object in results {
+                context.delete(object)
+            }
+
+            try context.save()
+
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        fetchDataFromCoredata()
+    }
 }
